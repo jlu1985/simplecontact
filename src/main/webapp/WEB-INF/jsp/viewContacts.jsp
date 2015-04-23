@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,17 +8,18 @@
 <title>View Contacts</title>
 </head>
 <body>
-
-<div id="emptyMessageBlock" class=<c:
-<c:when test="${!hasContent}">
-
-</c:when>>
-
-</div>
-<div id="contactsBLock" class=${ }>
-
-
-</div>
-
+	<c:choose>
+		<c:when test="${hasContent}">
+			<c:set var="messageStyle" value="none" />
+			<c:set var="contentStyle" value="block" />
+		</c:when>
+		<c:otherwise>
+			<c:set var="messageStyle" value="block" />
+			<c:set var="contentStyle" value="none" />
+		</c:otherwise>
+	</c:choose>
+	value of hasContent ${hasContent }
+	<div id="messageDiv" style="display:${messageStyle}">There is no content, click to add a new one</div>
+	<div id="contactsDiv" style="display:${contentStyle}">Some contents here</div>
 </body>
 </html>

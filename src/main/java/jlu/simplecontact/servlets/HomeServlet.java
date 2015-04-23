@@ -16,9 +16,9 @@ public class HomeServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		super.doGet(request, response);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/viewContacts.jsp");
-		
+		request.setAttribute("hasContent", true);
 		dispatcher.forward(request, response);
+		return;
 	}
 }
