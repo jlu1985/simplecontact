@@ -1,6 +1,8 @@
 package jlu.simplecontact.models;
 
-public class Contact {
+import java.io.Serializable;
+
+public class Contact implements Serializable{
 
 	private long contactId;
 	private String personName;

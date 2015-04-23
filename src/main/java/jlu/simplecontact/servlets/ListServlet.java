@@ -10,14 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/")
-public class HomeServlet extends HttpServlet{
+@WebServlet("/list")
+public class ListServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/viewContacts.jsp");
-		request.setAttribute("hasContent", true);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/listContact.jsp");
 		dispatcher.forward(request, response);
 		return;
 	}
