@@ -4,13 +4,9 @@ import java.sql.Connection;
 
 public abstract class AbstractJdbcAccess<T> implements BasicAccess<T>{
 
-	private ConnectionManager connectionManager;
+	private final ConnectionManager connectionManager;
 	
-	public ConnectionManager getConnectionManager() {
-		return connectionManager;
-	}
-
-	public void setConnectionManager(ConnectionManager connectionManager) {
+	public AbstractJdbcAccess(ConnectionManager connectionManager) {
 		this.connectionManager = connectionManager;
 	}
 	

@@ -16,6 +16,10 @@ import jlu.simplecontact.models.ContactBuilder;
 public class JdbcAccess extends AbstractJdbcAccess<Contact> implements
 		BasicAccess<Contact> {
 
+	public JdbcAccess(ConnectionManager connectionManager) {
+		super(connectionManager);
+	}
+
 	@Override
 	public List<Contact> find() {
 		try (Connection conn = getConnection()) {

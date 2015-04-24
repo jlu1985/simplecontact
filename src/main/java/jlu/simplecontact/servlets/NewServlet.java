@@ -10,15 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jlu.simplecontact.models.Contact;
+import jlu.simplecontact.models.ContactBuilder;
 
 @WebServlet("/newContact")
-public class NewServlet extends HttpServlet{
+public class NewServlet extends AbstractContactServlet{
 
 @Override
 protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 		throws ServletException, IOException {
-	
-	
 	RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/newContact.jsp");
 	rd.forward(req, resp);
 	return;
@@ -27,8 +26,18 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 @Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-	Contact c = new Contact();
-	req.setAttribute("contact", c);
+	
+	String name = req.getParameter("name");
+	String email = req.getParameter("email");
+	String phone = req.getParameter("phone");
+	
+	Contact newContact = ContactBuilder.newInstance().name(name).email(email).phone(phone).build();
+	
+	long id = getContactDao().create(newContact);
+	newContact.setContactId(id);
+	String message = "Added Contact " + newContact;
+	
+	req.setAttribute("message", message);
 	req.getRequestDispatcher("/WEB-INF/jsp/confirmation.jsp").forward(req, resp);
 	return;
 	}

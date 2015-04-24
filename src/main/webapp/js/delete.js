@@ -5,7 +5,7 @@ function packSelections (){
 		return this.value
 	}).get();
 	
-	$('#streamedSelection').attr('value',value);
+	$('#selections').attr('value',value);
 } 
 
 
@@ -17,14 +17,14 @@ function selectionCheck(){
 
 function confirmDelete(){
 	'use strict'
-	var value = $('#streamedSelection').attr('value');
+	var value = $('#selections').attr('value');
 	
 	if (value === undefined || value === null){
 		alert('select at least one')
 		return false;
 	}
 	
-	return confirm('You are about to delete ids: ['  + $('#streamedSelection').attr('value') +']')
+	return confirm('You are about to delete ids: ['  + $('#selections').attr('value') +']')
 }
 
 $(document).ready(function(){

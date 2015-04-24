@@ -13,7 +13,7 @@
 		<c:forEach var="record" items="${records}">
 			<input type="checkbox" value="${record.contactId}" /> ${record.personName }<br />
 		</c:forEach>
-		<input type="hidden" id="streamedSelection"> 
+		<input type="hidden" id="selections" name="selections"> 
 		<input type="submit" />
 		<input type="button" value="Back" onClick="history.go(-1);return true;"/> 
 	</form>

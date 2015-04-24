@@ -11,6 +11,7 @@
 	<div id="nav">
 		<ul>
 			<li><a href=<c:url value="/newContact"/>>new</a></li>
+			<li><a href=<c:url value="/listContacts"/>>list</a></li>
 			<li><a href=<c:url value="/deleteContact"/>>delete</a></li>
 		
 		</ul>
@@ -29,6 +30,5 @@
 	<div id="messageDiv" style="display:${messageStyle}">There is no content, <a href=<c:url value="/newContact"/>>click</a> to add a new one</div>
 	<div id="contactsDiv" style="display:${contentStyle}">Some contents here</div>
 	
-	${sessionScope.myobject}
 </body>
 </html>
