@@ -9,9 +9,9 @@
 
 
 	<form id="deleteForm" method="post">
-
-		<c:forEach var="record" items="${records}">
-			<input type="checkbox" value="${record.contactId}" /> ${record.personName }<br />
+		<input type="checkbox" id="selectAll"> Toggle All<br/>
+		<c:forEach var="contact" items="${contacts}">
+			<input type="checkbox" value="${contact.contactId}" /> ${contact.personName }<br />
 		</c:forEach>
 		<input type="hidden" id="selections" name="selections"> 
 		<input type="submit" />

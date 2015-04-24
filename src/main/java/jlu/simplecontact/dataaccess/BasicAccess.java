@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface BasicAccess<T> {
 
-	public long create(T t);
+	public boolean create(T t);
 	public int update(T t);
 	public List<T> find();
 	public int delete(long id);

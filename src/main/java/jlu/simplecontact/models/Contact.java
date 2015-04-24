@@ -1,8 +1,7 @@
 package jlu.simplecontact.models;
 
-import java.io.Serializable;
 
-public class Contact implements Serializable{
+public class Contact{
 
 	private long contactId;
 	private String personName;
@@ -39,5 +38,12 @@ public class Contact implements Serializable{
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	@Override
+	public String toString() {
+		return String
+				.format("Contact [contactId=%s, personName=%s, email=%s, phoneNumber=%s]",
+						contactId, personName, email, phoneNumber);
 	}
 }

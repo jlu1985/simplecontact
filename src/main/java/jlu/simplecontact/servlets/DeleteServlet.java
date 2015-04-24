@@ -40,7 +40,7 @@ public class DeleteServlet extends AbstractContactServlet {
 			throws ServletException, IOException {
 		long[] ids = prepareIds(req);
 		int result = getContactDao().delete(ids);
-		String message = (result == 1) ? "contacts deleted" : "failed deleting contacts";
+		String message = (result > 0) ? "" + result + " contact(s) deleted" : "failed deleting contacts";
 		req.setAttribute("message", message);
 		req.getRequestDispatcher("/WEB-INF/jsp/confirmation.jsp").forward(req,
 				resp);

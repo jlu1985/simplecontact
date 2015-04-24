@@ -33,9 +33,7 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 	
 	Contact newContact = ContactBuilder.newInstance().name(name).email(email).phone(phone).build();
 	
-	long id = getContactDao().create(newContact);
-	newContact.setContactId(id);
-	String message = "Added Contact " + newContact;
+	String message = (getContactDao().create(newContact))?"New ontact added":"failed adding contact";
 	
 	req.setAttribute("message", message);
 	req.getRequestDispatcher("/WEB-INF/jsp/confirmation.jsp").forward(req, resp);

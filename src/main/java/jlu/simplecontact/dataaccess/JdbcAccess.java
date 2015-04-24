@@ -23,7 +23,8 @@ public class JdbcAccess extends AbstractJdbcAccess<Contact> implements
 	@Override
 	public List<Contact> find() {
 		try (Connection conn = getConnection()) {
-			PreparedStatement psmt = conn.prepareStatement("select");
+			String selectStatement = "select id, name, phone, email from contact";
+			PreparedStatement psmt = conn.prepareStatement(selectStatement);
 			ResultSet rs = psmt.executeQuery();
 
 			List<Contact> results = new ArrayList<>();
@@ -40,35 +41,35 @@ public class JdbcAccess extends AbstractJdbcAccess<Contact> implements
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return Collections.emptyList();
 		}
-		return null;
+		
 	}
 
 	@Override
-	public long create(Contact t) {
-		String insertStatement = "insert";
+	public boolean create(Contact t) {
+		String insertStatement = "insert into contact (name,email,phone) values (?,?,?)";
 		try (Connection conn = getConnection()) {
-			PreparedStatement psmt = conn.prepareStatement(insertStatement,
-					Statement.RETURN_GENERATED_KEYS);
+			
+			PreparedStatement psmt = conn.prepareStatement(insertStatement);
 
-			psmt.executeQuery();
-			ResultSet rs = psmt.getGeneratedKeys();
-			if (rs.next()) {
-				return rs.getLong(1);
-			} else {
-				return -1;
-			}
-
+			psmt.setString(1, t.getPersonName());
+			psmt.setString(2, t.getEmail());
+			psmt.setString(3, t.getPhoneNumber());
+			psmt.execute();
+			
+			
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
-		return 0;
 	}
 
 	@Override
 	public int delete(long id) {
 
-		String deleteStatement = "delete where id=?";
+		String deleteStatement = "delete from contact where id=?";
 		try (Connection conn = getConnection()) {
 
 			PreparedStatement psmt = conn.prepareStatement(deleteStatement);
@@ -78,18 +79,19 @@ public class JdbcAccess extends AbstractJdbcAccess<Contact> implements
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return 0;
 		}
 
-		return 0;
+		
 	}
 
 	@Override
 	public int delete(long... ids) {
 
 		if (ids.length == 1) {
-			return delete(ids);
+			return delete(ids[0]);
 		} else if (ids.length > 1) {
-			String deleteStatement = "delete where id in ";
+			String deleteStatement = "delete from contact where id in ";
 			String[] questionMarks = new String[ids.length];
 			Arrays.fill(questionMarks, "?");
 			String streamedQuestionMarks = Arrays.stream(questionMarks)
@@ -109,13 +111,14 @@ public class JdbcAccess extends AbstractJdbcAccess<Contact> implements
 				return psmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
+				return 0;
 			}
 		}
 
 		else {
 			return 0;
 		}
-		return 0;
+	
 	}
 
 	@Override
